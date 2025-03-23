@@ -2,11 +2,12 @@ class ActionProvider {
   constructor(createChatBotMessage, setStateFunc) {
     this.createChatBotMessage = createChatBotMessage;
     this.setState = setStateFunc;
+    this.apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
   }
 
   handleMessage = async (message) => {
     try {
-      const response = await fetch("http://localhost:5000/chat", {
+      const response = await fetch(`${this.apiBaseUrl}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
